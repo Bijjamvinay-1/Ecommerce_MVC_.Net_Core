@@ -1,7 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using MVC_ON_Ecomm_APP.Data;
+using MVC_ON_Ecomm_APP.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => 
+options.UseSqlServer(
+ builder.Configuration.GetConnectionString("DefaultConnection")
+ ));
+
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 var app = builder.Build();
 
